@@ -1,0 +1,95 @@
+---
+// Component Imports
+import Button from '../components/Button.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Footer from '../components/Footer.astro';
+
+// Full Astro Component Syntax:
+// https://docs.astro.build/core-concepts/astro-components/
+---
+
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Bluejay Hvac</title>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init('5JFJ0yXk9FCeI4dbo');
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                // generate a five digit number for the contact_number variable
+                this.contact_number.value = Math.random() * 100000 | 0;
+                // these IDs from the previous steps
+                emailjs.sendForm('service_c58gvgc', 'template_7guepxt', this)
+                    .then(function() {
+                        console.log('SUCCESS!');
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                    });
+            });
+        }
+    </script>
+	</head>
+
+	<body>
+		<Navbar />
+		<Hero />
+
+		<div id="about" class="flex flex-col md:flex-row justify-center items-center gap-4 p-2">
+			<div class="flex-1 p-5 md:p-6"><img class="object-cover" src="/public/about.jpg" /></div>
+			<div class="flex-1 p-5 md:p-6">
+			<h2 class="text-3xl font-semibold my-4">About Us</h2>
+			<p>Since our inception, we've been committed to providing unparalleled HVAC services to our community, ensuring comfortable homes and satisfied customers. Our team of certified professionals brings years of experience, superior workmanship, and a passion for excellence to every project. Trust in us to deliver reliable, energy-efficient HVAC solutions that will keep your home comfortable and your costs manageable all year round.</p></div>
+		</div>
+
+		<div id="what-we-do" class="flex flex-col md:flex-row-reverse justify-center items-center gap-4 p-2">
+			<div class="flex-1 p-5 md:p-6"><img class="object-cover" src="/public/hero.jpg" /></div>
+			<div class="flex-1 p-5 md:p-6">
+			<h2 class="text-3xl font-semibold my-4 ">What We Do</h2>
+			<p>We specialize in all aspects of HVAC services, from installing state-of-the-art heating and cooling systems to conducting thorough repairs and routine maintenance. Our team uses the latest technology to diagnose issues and provide efficient solutions that enhance the comfort and air quality of your home. Whether it's upgrading your current system or maintaining its peak performance, we're committed to keeping your indoor environment perfect, regardless of the season.</p>
+			</div>
+		</div>
+
+		<form id="contact-form" class="p-10 w-full">
+			<h2 class="text-3xl font-semibold my-4 text-center">How Can We Help You?</h2>
+			<input type="hidden" name="contact_number">
+				<div id="what-we-do" class="flex justify-center items-center gap-4 p-2">
+					<div class="form-control w-full max-w-xs">
+						<label class="label">
+						<span class="label-text">Name</span>
+						</label>
+						<input type="text" placeholder="Jay Lee" name="user_name" class="input input-bordered w-full max-w-xs" />
+					</div>
+					<div class="form-control w-full max-w-xs">
+						<label class="label">
+						<span class="label-text">Email</span>
+						</label>
+						<input type="text" placeholder="Your Email@bluejayhvac.com" name="user_name" class="input input-bordered w-full max-w-xs" />
+					</div>
+				</div>
+			
+
+			<div class="flex justify-center items-center gap-4 p-2">
+				<div class="form-control w-full max-w-lg">
+					<label class="label">
+						<span class="label-text">Message</span>
+					</label>
+					<textarea class="textarea textarea-bordered h-44" placeholder="Write a message"></textarea>
+				</div>
+			</div>
+			
+    </form>
+
+		<Footer />
+	</body>
+</html>
